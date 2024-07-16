@@ -1,7 +1,7 @@
 // Copyright 2019 Aleksander Woźniak
 // SPDX-License-Identifier: Apache-2.0
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../customization/header_style.dart';
@@ -15,6 +15,7 @@ class CalendarHeader extends StatelessWidget {
   final CalendarFormat calendarFormat;
   final HeaderStyle headerStyle;
   final VoidCallback onLeftChevronTap;
+  final VoidCallback onTodayButtonTap;
   final VoidCallback onRightChevronTap;
   final VoidCallback onHeaderTap;
   final VoidCallback onHeaderLongPress;
@@ -30,6 +31,7 @@ class CalendarHeader extends StatelessWidget {
     required this.headerStyle,
     required this.onLeftChevronTap,
     required this.onRightChevronTap,
+    required this.onTodayButtonTap,
     required this.onHeaderTap,
     required this.onHeaderLongPress,
     required this.onFormatButtonTap,
@@ -49,24 +51,20 @@ class CalendarHeader extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          if (headerStyle.leftChevronVisible)
-            CustomIconButton(
-              icon: headerStyle.leftChevronIcon,
-              onTap: onLeftChevronTap,
-              margin: headerStyle.leftChevronMargin,
-              padding: headerStyle.leftChevronPadding,
-            ),
           Expanded(
             child: headerTitleBuilder?.call(context, focusedMonth) ??
                 GestureDetector(
                   onTap: onHeaderTap,
                   onLongPress: onHeaderLongPress,
-                  child: Text(
-                    text,
-                    style: headerStyle.titleTextStyle,
-                    textAlign: headerStyle.titleCentered
-                        ? TextAlign.center
-                        : TextAlign.start,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      text,
+                      style: headerStyle.titleTextStyle,
+                      textAlign: headerStyle.titleCentered
+                          ? TextAlign.center
+                          : TextAlign.start,
+                    ),
                   ),
                 ),
           ),
@@ -84,6 +82,19 @@ class CalendarHeader extends StatelessWidget {
                 showsNextFormat: headerStyle.formatButtonShowsNext,
               ),
             ),
+          if (headerStyle.leftChevronVisible)
+            CustomIconButton(
+              icon: headerStyle.leftChevronIcon,
+              onTap: onLeftChevronTap,
+              margin: headerStyle.leftChevronMargin,
+              padding: headerStyle.leftChevronPadding,
+            ),
+          if (headerStyle.todayButtonVisible)
+            InkWell(
+                onTap: onTodayButtonTap,
+                child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: headerStyle.todayButton)),
           if (headerStyle.rightChevronVisible)
             CustomIconButton(
               icon: headerStyle.rightChevronIcon,

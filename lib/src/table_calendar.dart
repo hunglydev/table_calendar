@@ -423,6 +423,10 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
     }
   }
 
+  void _onTodayButtonTap() {
+    setState(() => _focusedDay.value = DateTime.now());
+  }
+
   void _toggleRangeSelection() {
     if (_rangeSelectionMode == RangeSelectionMode.toggledOn) {
       _rangeSelectionMode = RangeSelectionMode.toggledOff;
@@ -473,6 +477,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
                   widget.onFormatChanged?.call(format);
                 },
+                onTodayButtonTap: _onTodayButtonTap,
               );
             },
           ),

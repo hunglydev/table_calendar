@@ -78,6 +78,8 @@ class HeaderStyle {
 
   /// Decoration of the header.
   final BoxDecoration decoration;
+  final bool todayButtonVisible;
+  final Widget todayButton;
 
   /// Creates a `HeaderStyle` used by `TableCalendar` widget.
   const HeaderStyle({
@@ -103,6 +105,8 @@ class HeaderStyle {
     this.rightChevronIcon = const Icon(Icons.chevron_right),
     this.leftChevronVisible = true,
     this.rightChevronVisible = true,
+    this.todayButtonVisible = true,
+    this.todayButton = const Icon(Icons.today),
     this.decoration = const BoxDecoration(),
   });
 }
