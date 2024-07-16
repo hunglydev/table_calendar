@@ -428,6 +428,7 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
 
   void _onTodayButtonTap() {
     setState(() {
+      _focusedDay.value = DateTime.now();
       widget.onTodaySelected?.call();
     });
   }
