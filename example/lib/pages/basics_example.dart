@@ -44,6 +44,12 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
             });
           }
         },
+        onTodaySelected: () {
+          setState(() {
+            _selectedDay = DateTime.now();
+            _focusedDay = DateTime.now();
+          });
+        },
         onFormatChanged: (format) {
           if (_calendarFormat != format) {
             // Call `setState()` when updating calendar format
